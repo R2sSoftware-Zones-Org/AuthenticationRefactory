@@ -1,4 +1,5 @@
-﻿using Model.Service;
+﻿using Model.DataAccess;
+using Model.Service;
 using Model.Utility;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ public partial class Login : System.Web.UI.Page
         string password = this.Password.Text;
 
         AuthenticationService authenticationService = new AuthenticationService();
+
+        authenticationService.MyAuthenticationDao = new AuthenticationDao();
 
         var status = authenticationService.VerifyPasswordById(id, password);
 

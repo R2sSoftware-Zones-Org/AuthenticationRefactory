@@ -1,22 +1,26 @@
 ﻿using Model.DataAccess;
 using Model.Utility;
-using System;
 using System.Data;
 
 namespace Model.Service
 {
     public class AuthenticationService
     {
-        public AuthenticationDao MyAuthenticationDao { get; private set; }
+        public IAuthenticationDao MyAuthenticationDao { get; set; }
 
-        public AuthenticationService()
-        {
-            this.MyAuthenticationDao = new AuthenticationDao();
-        }
+        //public AuthenticationService()
+        //{
+        //    this.MyAuthenticationDao = new AuthenticationDao();
+        //}
 
+        /// <summary>
+        /// 驗證密碼
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public VerifyStatus VerifyPasswordById(string id, string password)
         {
-
             DataTable dt = MyAuthenticationDao.QueryPasswordById(id, password);
 
             if (dt.Rows.Count > 0)
@@ -38,7 +42,6 @@ namespace Model.Service
 
         public void UpdatePassword(string id, string newPassword)
         {
-
             MyAuthenticationDao.UpdatePassword(id, newPassword);
         }
     }

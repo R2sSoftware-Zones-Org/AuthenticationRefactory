@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace Model.DataAccess
 {
-    public class AuthenticationDao
+    public class AuthenticationDao : IAuthenticationDao
     {
         public DataTable QueryPasswordById(string id, string password)
         {
@@ -25,9 +25,11 @@ namespace Model.DataAccess
             return dt;
         }
 
-        internal void UpdatePassword(string id, string newPassword)
+        public void UpdatePassword(string id, string newPassword)
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }

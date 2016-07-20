@@ -1,9 +1,11 @@
 ﻿using Model.Service;
+using Model.Utility;
 using System;
 
 public partial class ChangePassword : System.Web.UI.Page
 {
     public AuthenticationService MyAuthenticationService { get; set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         MyAuthenticationService = new AuthenticationService();
@@ -28,12 +30,16 @@ public partial class ChangePassword : System.Web.UI.Page
             else
             {
                 //新密碼與確認密碼不符
+                result = "新密碼與確認密碼不符";
             }
         }
         else
         {
             //帳號與密碼不符
+            result = "帳號與密碼不符";
         }
+
+        Result.Text = result;
     }
 
     /// <summary>
@@ -44,12 +50,10 @@ public partial class ChangePassword : System.Web.UI.Page
     {
         string result = string.Empty;
 
-
         try
         {
             MyAuthenticationService.UpdatePassword(id, newPassword);
             result = "更新密碼成功";
-
         }
         catch (Exception)
         {
@@ -79,7 +83,6 @@ public partial class ChangePassword : System.Web.UI.Page
         var status = MyAuthenticationService.VerifyPasswordById(id, password);
 
         return (status == VerifyStatus.Passed);
-        
 
         throw new NotImplementedException();
     }
